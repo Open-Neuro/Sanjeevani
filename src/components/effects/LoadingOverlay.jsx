@@ -73,7 +73,7 @@ export default function LoadingOverlay({ onComplete }) {
             }}
         >
             <svg
-                viewBox="0 0 800 600"
+                viewBox="0 0 1000 1000"
                 preserveAspectRatio="xMidYMid slice"
                 style={{ width: '100%', height: '100%', display: 'block' }}
             >
@@ -84,7 +84,7 @@ export default function LoadingOverlay({ onComplete }) {
 
                         <g className="vi-mask-group">
                             {/* ── 6-petal logo mark (centred, transparent) ── */}
-                            <g transform="translate(400, 175)">
+                            <g transform="translate(500, 420)">
                                 {[0, 60, 120, 180, 240, 300].map((deg, i) => (
                                     <path
                                         key={i}
@@ -100,14 +100,15 @@ export default function LoadingOverlay({ onComplete }) {
 
                             {/* ── SANJEEVANI ── */}
                             <text
-                                x="50%" y="295"
-                                fontSize="88"
+                                x="500" y="520"
+                                fontSize="72"
                                 textAnchor="middle"
                                 dominantBaseline="middle"
                                 fontFamily="'Outfit', sans-serif"
                                 fontWeight="900"
                                 letterSpacing="3"
                                 fill="black"
+                                className="loading-text"
                             >
                                 SANJEEVANI
                             </text>
@@ -118,6 +119,13 @@ export default function LoadingOverlay({ onComplete }) {
                 {/* Cream fill masked by the transparent logo + text cut-outs */}
                 <rect width="100%" height="100%" fill="#f0ede6" mask="url(#rxMask)" />
             </svg>
+            <style>{`
+                @media (max-width: 768px) {
+                    .loading-text {
+                        font-size: 50px;
+                    }
+                }
+            `}</style>
         </div>
     );
 }

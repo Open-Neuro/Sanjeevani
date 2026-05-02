@@ -67,7 +67,7 @@ export default function Sidebar({ isOpen, onClose }) {
                 ref={panelRef}
                 style={{
                     position: "fixed", top: 0, left: 0,
-                    width: "min(480px, 48vw)", height: "100vh",
+                    width: "min(480px, 80vw)", height: "100vh",
                     background: "linear-gradient(170deg, #1c2b0d 0%, #2d3d1a 45%, #374c1e 100%)",
                     zIndex: 199,
                     display: "flex", flexDirection: "column", justifyContent: "space-between",

@@ -36,14 +36,24 @@ Sanjeevani isn't just a basic dashboard; it's a complete ecosystem designed for 
 
 ### 3️⃣ Award-Winning Immersive User Experience
 - **Cinematic Web Design:** Utilizes `GSAP` and `Lenis` for silky-smooth scroll choreography and mask-reveal animations across all pages.
-- **3D Interactive Elements:** Built with `Three.js` (`@react-three/fiber`) and `Vanta.js` to create a modern, trust-building brand experience that wows stakeholders.
-- **Mobile-First Approach:** Our custom device layouts prove that our app looks spectacular on desktop, tablet, and mobile.
+- **3D Interactive Elements:** Built with `Three.js` (`@react-three/fiber`) and `Vanta.js` to create a modern, trust-building brand experience.
+- **Mobile-First & Responsive:** A premium, fully responsive design that looks spectacular on desktop, tablet, and mobile devices.
+
+---
+
+## 📱 Responsive Excellence
+
+Sanjeevani is engineered for the modern web, ensuring a flawless experience regardless of the device.
+
+- **Dynamic Layouts:** Adaptive components that re-organize for optimal viewing on any screen size.
+- **Optimized Interactions:** Touch-friendly controls and fluid animations tuned for mobile performance.
+- **Responsive Typography:** Using `clamp()` and media queries for perfect legibility everywhere.
 
 ---
 
 ## 🛠️ The Tech Engine
 
-Under the hood, Sanjeevani MVP is built on a modern, high-performance stack carefully chosen for developer velocity and unparalleled user experience.
+Under the hood, Sanjeevani is built on a modern, high-performance stack carefully chosen for developer velocity and unparalleled user experience.
 
 | Aspect | Technologies Used |
 |---|---|
@@ -100,7 +110,7 @@ We are always looking for passionate engineers, designers, and healthcare profes
 - **Branch Naming Guidelines:** `feature/<name>` or `fix/<issue>`
 - **Pull Requests:** Please include a brief description of the problem solved and a visual screenshot of the UI change.
 
-> **📌 Note to Stakeholders & Investors:** This repository currently represents a polished, production-ready frontend MVP focused on demonstrating core platform value, rich interactions, and potential ROI. 
+> **📌 Note to Stakeholders & Investors:** This repository represents a polished, production-ready frontend MVP focused on demonstrating core platform value, rich interactions, and potential ROI.
 
 ---
 <div align="center">
