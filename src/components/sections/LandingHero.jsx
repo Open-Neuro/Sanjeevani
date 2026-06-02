@@ -6,11 +6,8 @@ import Logo3D from "../effects/Logo3D";
  * LandingHero — LAYER 1 (z-10)
  * The initial hero screen with the dark-green gradient, brand title,
  * divider row, and scroll hint. Always sits behind the cube curtain.
- *
- * Props:
- *  onMenuClick — passed down to Navbar to open the Sidebar
  */
-export default function LandingHero({ onMenuClick }) {
+export default function LandingHero() {
     return (
         <div
             className="landing-content absolute inset-0 z-10 overflow-hidden"
