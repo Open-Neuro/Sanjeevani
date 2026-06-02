@@ -140,7 +140,7 @@ export default function Logo3D({ style, color = '#1a1a1a', highlightColor = '#bb
             renderer.dispose();
             if (mount.contains(renderer.domElement)) mount.removeChild(renderer.domElement);
         };
-    }, []);
+    }, [color, highlightColor]);
 
     return (
         <div
