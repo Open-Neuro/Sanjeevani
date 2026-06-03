@@ -10,7 +10,7 @@ import Logo3D from "../effects/Logo3D";
  * Props:
  *  onMenuClick — passed down to Navbar to open the Sidebar
  */
-export default function LandingHero({ onMenuClick }) {
+export default function LandingHero() {
     return (
         <div
             className="landing-content absolute inset-0 z-10 overflow-hidden"
