@@ -41,7 +41,7 @@ const TEXT = {
     color: "#2d3d1a",
 };
 
-export default function FooterSection() {
+export default function FooterSection({ onBookDemo }) {
     return (
         <section id="footer-section" style={{
             background: "#ede9df",
@@ -78,6 +78,33 @@ export default function FooterSection() {
 
                 {/* Right: Contact */}
                 <div className="footer-anim text-left lg:text-right" style={{ position: "relative", zIndex: 10 }}>
+                    <button
+                        onClick={onBookDemo}
+                        style={{
+                            ...TEXT,
+                            background: "none",
+                            border: "1px solid #2d3d1a",
+                            borderRadius: "999px",
+                            padding: "10px 20px",
+                            fontSize: "0.75rem",
+                            fontWeight: 700,
+                            letterSpacing: "0.1em",
+                            textTransform: "uppercase",
+                            cursor: "pointer",
+                            marginBottom: "24px",
+                            transition: "all 0.3s ease"
+                        }}
+                        onMouseEnter={e => {
+                            e.currentTarget.style.background = "#2d3d1a";
+                            e.currentTarget.style.color = "#ede9df";
+                        }}
+                        onMouseLeave={e => {
+                            e.currentTarget.style.background = "none";
+                            e.currentTarget.style.color = "#2d3d1a";
+                        }}
+                    >
+                        Schedule a Demo
+                    </button>
                     <p style={{ ...TEXT, fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", opacity: 0.5, margin: "0 0 12px", lineHeight: 1.6 }}>
                         IF YOU HAVE ANY QUESTIONS<br />FEEL FREE TO CONTACT US:
                     </p>

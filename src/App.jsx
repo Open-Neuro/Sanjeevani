@@ -79,7 +79,7 @@ export default function App() {
           ╚══════════════════════════════════════════════════════════╝
         */}
         <div className="animation-block relative h-screen w-full overflow-hidden">
-          <LandingHero onMenuClick={() => setMenuOpen(true)} />
+          <LandingHero />
           <FeaturesSection />
           <CubeGrid />
         </div>
@@ -101,7 +101,7 @@ export default function App() {
 
           {/* Placed absolutely at the bottom so it aligns with the screen when container pins at 'bottom bottom' */}
           <div className="footer-inner absolute bottom-0 left-0 w-full h-screen z-[60]" style={{ opacity: 0, pointerEvents: "none" }}>
-            <FooterSection />      {/* Page 7 — Footer / contact (cream bg)   */}
+            <FooterSection onBookDemo={() => setDemoModalOpen(true)} />      {/* Page 7 — Footer / contact (cream bg)   */}
           </div>
 
           <div className="footer-grid-wrapper absolute bottom-0 left-0 w-full h-screen z-[70] pointer-events-none">
