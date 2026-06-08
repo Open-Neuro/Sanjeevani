@@ -8,9 +8,9 @@ import Logo3D from "../effects/Logo3D";
  * divider row, and scroll hint. Always sits behind the cube curtain.
  *
  * Props:
- *  onMenuClick — passed down to Navbar to open the Sidebar
+ *  None
  */
-export default function LandingHero({ onMenuClick }) {
+export default function LandingHero() {
     return (
         <div
             className="landing-content absolute inset-0 z-10 overflow-hidden"
@@ -47,7 +47,6 @@ export default function LandingHero({ onMenuClick }) {
                         opacity: 0.18, mixBlendMode: 'luminosity',
                     }} />
 
-                    {/* Navbar will now be rendered at the App level to stay sticky */}
 
                     {/* Giant brand title */}
                     <div className="hero-text" style={{

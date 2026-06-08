@@ -13,6 +13,7 @@ export default function DemoModal({ isOpen, onClose }) {
     const modalRef = useRef(null);
     const contentRef = useRef(null);
     const formRef = useRef(null);
+    const nameInputRef = useRef(null);
 
     useEffect(() => {
         if (isOpen) {
@@ -33,6 +34,16 @@ export default function DemoModal({ isOpen, onClose }) {
                 { opacity: 0, y: 20 },
                 { opacity: 1, y: 0, duration: 0.5, delay: 0.6, ease: "power2.out" }
             );
+
+            // Auto-focus logic for the first input field
+            const focusTimeout = setTimeout(() => {
+                if (nameInputRef.current) nameInputRef.current.focus();
+            }, 500);
+
+            return () => {
+                clearTimeout(focusTimeout);
+                document.body.style.overflow = "";
+            };
         } else {
             document.body.style.overflow = "";
         }
@@ -71,6 +82,9 @@ export default function DemoModal({ isOpen, onClose }) {
     return (
         <div
             ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="demo-modal-title"
             className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto p-2 md:p-4"
             onClick={handleClose}
             style={{
@@ -130,6 +144,7 @@ export default function DemoModal({ isOpen, onClose }) {
 
                 <button
                     onClick={handleClose}
+                    aria-label="Close modal"
                     style={{
                         position: "absolute",
                         top: "18px",
@@ -194,7 +209,7 @@ export default function DemoModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="demo-form-field">
-                        <h2 style={{
+                        <h2 id="demo-modal-title" style={{
                             fontFamily: "'Outfit', sans-serif",
                             fontWeight: 900,
                             fontSize: "clamp(1.2rem, 3vw, 1.65rem)",
@@ -222,7 +237,7 @@ export default function DemoModal({ isOpen, onClose }) {
                     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                         <div className="demo-form-field demo-input-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
                             <div>
-                                <label style={{
+                                <label htmlFor="demo-name" style={{
                                     display: "block",
                                     color: "rgba(244, 237, 230, 0.7)",
                                     fontSize: "0.68rem",
@@ -233,6 +248,8 @@ export default function DemoModal({ isOpen, onClose }) {
                                     fontFamily: "'Outfit', sans-serif"
                                 }}>Name</label>
                                 <input
+                                    id="demo-name"
+                                    ref={nameInputRef}
                                     type="text"
                                     className="demo-input"
                                     required
@@ -241,7 +258,7 @@ export default function DemoModal({ isOpen, onClose }) {
                                 />
                             </div>
                             <div>
-                                <label style={{
+                                <label htmlFor="demo-pharmacy" style={{
                                     display: "block",
                                     color: "rgba(244, 237, 230, 0.7)",
                                     fontSize: "0.68rem",
@@ -252,6 +269,7 @@ export default function DemoModal({ isOpen, onClose }) {
                                     fontFamily: "'Outfit', sans-serif"
                                 }}>Pharmacy Name</label>
                                 <input
+                                    id="demo-pharmacy"
                                     type="text"
                                     className="demo-input"
                                     required
@@ -262,7 +280,7 @@ export default function DemoModal({ isOpen, onClose }) {
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
+                            <label htmlFor="demo-phone" style={{
                                 display: "block",
                                 color: "rgba(244, 237, 230, 0.7)",
                                 fontSize: "0.68rem",
@@ -273,6 +291,7 @@ export default function DemoModal({ isOpen, onClose }) {
                                 fontFamily: "'Outfit', sans-serif"
                             }}>Phone Number</label>
                             <input
+                                id="demo-phone"
                                 type="tel"
                                 className="demo-input"
                                 required
@@ -282,7 +301,7 @@ export default function DemoModal({ isOpen, onClose }) {
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
+                            <label htmlFor="demo-email" style={{
                                 display: "block",
                                 color: "rgba(244, 237, 230, 0.7)",
                                 fontSize: "0.68rem",
@@ -293,6 +312,7 @@ export default function DemoModal({ isOpen, onClose }) {
                                 fontFamily: "'Outfit', sans-serif"
                             }}>Email</label>
                             <input
+                                id="demo-email"
                                 type="email"
                                 className="demo-input"
                                 required
@@ -302,7 +322,7 @@ export default function DemoModal({ isOpen, onClose }) {
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
+                            <label htmlFor="demo-message" style={{
                                 display: "block",
                                 color: "rgba(244, 237, 230, 0.7)",
                                 fontSize: "0.68rem",
@@ -313,6 +333,7 @@ export default function DemoModal({ isOpen, onClose }) {
                                 fontFamily: "'Outfit', sans-serif"
                             }}>Message (Optional)</label>
                             <textarea
+                                id="demo-message"
                                 className="demo-input"
                                 rows="2"
                                 style={{ resize: "vertical", minHeight: "68px" }}
@@ -453,6 +474,14 @@ export default function DemoModal({ isOpen, onClose }) {
                 .demo-btn:hover {
                     transform: translateY(-2px);
                     box-shadow: 0 12px 35px rgba(183, 194, 94, 0.35);
+                }
+                .demo-btn:focus-visible {
+                    outline: 2px solid #b7c25e;
+                    outline-offset: 2px;
+                }
+                button[aria-label="Close modal"]:focus-visible {
+                    outline: 2px solid rgba(244, 237, 230, 0.6);
+                    outline-offset: 2px;
                 }
                 @media (max-width: 640px) {
                     .demo-input-grid {
