@@ -3,7 +3,7 @@
  * Props:
  *  onMenuClick — opens the Sidebar
  */
-export default function Navbar({ onMenuClick }) {
+export default function Navbar({ onMenuClick, onBookDemo }) {
     return (
         <div
             className="navbar fixed top-0 left-0 w-full py-4 px-6 md:py-7 md:px-10 flex justify-between items-center"
@@ -66,6 +66,7 @@ export default function Navbar({ onMenuClick }) {
 
             <div className="hidden md:flex items-center gap-[22px]">
                 <a href="#footer-section" className="nav-link">CONTACT US</a>
+                <button onClick={onBookDemo} className="nav-cta">BOOK A DEMO</button>
                 <a
                     href="https://sanjeevani-console.vercel.app/"
                     target="_blank"

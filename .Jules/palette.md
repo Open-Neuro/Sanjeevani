@@ -1,0 +1,3 @@
+## 2025-05-14 - Modal Accessibility and Focus Management
+**Learning:** For modals with GSAP entrance animations, triggering auto-focus on the first input field via the GSAP 'onComplete' callback ensures that focus is set exactly when the element becomes visible and interactive, improving the experience for keyboard and screen reader users. Additionally, linking labels to inputs with 'htmlFor' and 'id' is a fundamental yet often overlooked accessibility requirement.
+**Action:** Always use GSAP 'onComplete' for focus management in animated modals and verify 'htmlFor'/'id' pairings for all form elements.
