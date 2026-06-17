@@ -2,8 +2,9 @@
  * Navbar — top bar on the landing hero
  * Props:
  *  onMenuClick — opens the Sidebar
+ *  onBookDemo — opens the DemoModal
  */
-export default function Navbar({ onMenuClick }) {
+export default function Navbar({ onMenuClick, onBookDemo }) {
     return (
         <div
             className="navbar fixed top-0 left-0 w-full py-4 px-6 md:py-7 md:px-10 flex justify-between items-center"
@@ -75,6 +76,13 @@ export default function Navbar({ onMenuClick }) {
                 >
                     GET STARTED
                 </a>
+                <button
+                    className="nav-cta"
+                    onClick={onBookDemo}
+                    style={{ background: 'none', cursor: 'pointer' }}
+                >
+                    BOOK A DEMO
+                </button>
             </div>
         </div>
     );
