@@ -52,19 +52,22 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Backdrop */}
             <div
                 onClick={onClose}
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", inset: 0,
                     background: "rgba(0,0,0,0.40)",
                     zIndex: 198,
                     opacity: isOpen ? 1 : 0,
                     pointerEvents: isOpen ? "auto" : "none",
-                    transition: "opacity 0.4s ease",
+                    visibility: isOpen ? "visible" : "hidden",
+                    transition: "opacity 0.4s ease, visibility 0.4s ease",
                 }}
             />
 
             {/* Panel */}
             <div
                 ref={panelRef}
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
@@ -75,6 +78,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     transform: "translateX(-100%)",
                     boxShadow: "10px 0 50px rgba(0,0,0,0.55)",
                     overflowY: "auto",
+                    visibility: isOpen ? "visible" : "hidden",
                 }}
             >
                 <div>
