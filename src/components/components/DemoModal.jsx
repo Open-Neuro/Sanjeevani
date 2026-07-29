@@ -10,9 +10,11 @@ export default function DemoModal({ isOpen, onClose }) {
         message: ""
     });
     const [submitted, setSubmitted] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const modalRef = useRef(null);
     const contentRef = useRef(null);
     const formRef = useRef(null);
+    const nameInputRef = useRef(null);
 
     useEffect(() => {
         if (isOpen) {
@@ -23,7 +25,19 @@ export default function DemoModal({ isOpen, onClose }) {
             );
             gsap.fromTo(contentRef.current,
                 { opacity: 0, y: 60, scale: 0.92 },
-                { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: "power3.out", delay: 0.15 }
+                {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.6,
+                    ease: "power3.out",
+                    delay: 0.15,
+                    onComplete: () => {
+                        if (nameInputRef.current) {
+                            nameInputRef.current.focus();
+                        }
+                    }
+                }
             );
             gsap.fromTo(".demo-form-field",
                 { opacity: 0, x: -20 },
@@ -41,13 +55,19 @@ export default function DemoModal({ isOpen, onClose }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        gsap.to(formRef.current, {
-            opacity: 0,
-            y: -20,
-            duration: 0.4,
-            ease: "power2.in",
-            onComplete: () => setSubmitted(true)
-        });
+        setIsSubmitting(true);
+        setTimeout(() => {
+            gsap.to(formRef.current, {
+                opacity: 0,
+                y: -20,
+                duration: 0.4,
+                ease: "power2.in",
+                onComplete: () => {
+                    setSubmitted(true);
+                    setIsSubmitting(false);
+                }
+            });
+        }, 800);
     };
 
     const handleClose = () => {
@@ -62,7 +82,11 @@ export default function DemoModal({ isOpen, onClose }) {
             opacity: 0,
             duration: 0.35,
             ease: "power2.in",
-            onComplete: onClose
+            onComplete: () => {
+                onClose();
+                setSubmitted(false);
+                setIsSubmitting(false);
+            }
         });
     };
 
@@ -73,6 +97,9 @@ export default function DemoModal({ isOpen, onClose }) {
             ref={modalRef}
             className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto p-2 md:p-4"
             onClick={handleClose}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="demo-modal-title"
             style={{
                 background: "rgba(10, 17, 3, 0.9)",
                 backdropFilter: "blur(12px)",
@@ -130,6 +157,7 @@ export default function DemoModal({ isOpen, onClose }) {
 
                 <button
                     onClick={handleClose}
+                    aria-label="Close modal"
                     style={{
                         position: "absolute",
                         top: "18px",
@@ -194,7 +222,7 @@ export default function DemoModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="demo-form-field">
-                        <h2 style={{
+                        <h2 id="demo-modal-title" style={{
                             fontFamily: "'Outfit', sans-serif",
                             fontWeight: 900,
                             fontSize: "clamp(1.2rem, 3vw, 1.65rem)",
@@ -222,7 +250,7 @@ export default function DemoModal({ isOpen, onClose }) {
                     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                         <div className="demo-form-field demo-input-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
                             <div>
-                                <label style={{
+                                <label htmlFor="demo-name" style={{
                                     display: "block",
                                     color: "rgba(244, 237, 230, 0.7)",
                                     fontSize: "0.68rem",
@@ -231,17 +259,21 @@ export default function DemoModal({ isOpen, onClose }) {
                                     textTransform: "uppercase",
                                     marginBottom: "6px",
                                     fontFamily: "'Outfit', sans-serif"
-                                }}>Name</label>
+                                }}>Name <span className="text-red-500">*</span></label>
                                 <input
+                                    id="demo-name"
+                                    ref={nameInputRef}
                                     type="text"
                                     className="demo-input"
                                     required
+                                    aria-required="true"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                                    disabled={isSubmitting}
                                 />
                             </div>
                             <div>
-                                <label style={{
+                                <label htmlFor="demo-pharmacy" style={{
                                     display: "block",
                                     color: "rgba(244, 237, 230, 0.7)",
                                     fontSize: "0.68rem",
@@ -250,19 +282,22 @@ export default function DemoModal({ isOpen, onClose }) {
                                     textTransform: "uppercase",
                                     marginBottom: "6px",
                                     fontFamily: "'Outfit', sans-serif"
-                                }}>Pharmacy Name</label>
+                                }}>Pharmacy Name <span className="text-red-500">*</span></label>
                                 <input
+                                    id="demo-pharmacy"
                                     type="text"
                                     className="demo-input"
                                     required
+                                    aria-required="true"
                                     value={formData.pharmacyName}
                                     onChange={(e) => setFormData({ ...formData, pharmacyName: e.target.value })}
+                                    disabled={isSubmitting}
                                 />
                             </div>
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
+                            <label htmlFor="demo-phone" style={{
                                 display: "block",
                                 color: "rgba(244, 237, 230, 0.7)",
                                 fontSize: "0.68rem",
@@ -271,18 +306,21 @@ export default function DemoModal({ isOpen, onClose }) {
                                 textTransform: "uppercase",
                                 marginBottom: "6px",
                                 fontFamily: "'Outfit', sans-serif"
-                            }}>Phone Number</label>
+                            }}>Phone Number <span className="text-red-500">*</span></label>
                             <input
+                                id="demo-phone"
                                 type="tel"
                                 className="demo-input"
                                 required
+                                aria-required="true"
                                 value={formData.phone}
                                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                                disabled={isSubmitting}
                             />
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
+                            <label htmlFor="demo-email" style={{
                                 display: "block",
                                 color: "rgba(244, 237, 230, 0.7)",
                                 fontSize: "0.68rem",
@@ -291,18 +329,21 @@ export default function DemoModal({ isOpen, onClose }) {
                                 textTransform: "uppercase",
                                 marginBottom: "6px",
                                 fontFamily: "'Outfit', sans-serif"
-                            }}>Email</label>
+                            }}>Email <span className="text-red-500">*</span></label>
                             <input
+                                id="demo-email"
                                 type="email"
                                 className="demo-input"
                                 required
+                                aria-required="true"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                                disabled={isSubmitting}
                             />
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
+                            <label htmlFor="demo-message" style={{
                                 display: "block",
                                 color: "rgba(244, 237, 230, 0.7)",
                                 fontSize: "0.68rem",
@@ -313,17 +354,28 @@ export default function DemoModal({ isOpen, onClose }) {
                                 fontFamily: "'Outfit', sans-serif"
                             }}>Message (Optional)</label>
                             <textarea
+                                id="demo-message"
                                 className="demo-input"
                                 rows="2"
                                 style={{ resize: "vertical", minHeight: "68px" }}
                                 value={formData.message}
                                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                disabled={isSubmitting}
                             />
                         </div>
 
-                        <button type="submit" className="demo-submit-btn demo-btn" style={{ marginTop: "4px" }}>
-                            <span>Schedule Demo</span>
-                            <i className="ri-arrow-right-line" style={{ marginLeft: "8px" }} />
+                        <button
+                            type="submit"
+                            className="demo-submit-btn demo-btn"
+                            style={{ marginTop: "4px" }}
+                            disabled={isSubmitting}
+                        >
+                            <span>{isSubmitting ? "Scheduling..." : "Schedule Demo"}</span>
+                            {isSubmitting ? (
+                                <i className="ri-loader-4-line animate-spin" style={{ marginLeft: "8px" }} />
+                            ) : (
+                                <i className="ri-arrow-right-line" style={{ marginLeft: "8px" }} />
+                            )}
                         </button>
                     </form>
 
@@ -450,9 +502,13 @@ export default function DemoModal({ isOpen, onClose }) {
                         padding: 11px 20px;
                     }
                 }
-                .demo-btn:hover {
+                .demo-btn:hover:not(:disabled) {
                     transform: translateY(-2px);
                     box-shadow: 0 12px 35px rgba(183, 194, 94, 0.35);
+                }
+                .demo-btn:disabled {
+                    opacity: 0.7;
+                    cursor: not-allowed;
                 }
                 @media (max-width: 640px) {
                     .demo-input-grid {
