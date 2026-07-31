@@ -79,7 +79,7 @@ export default function App() {
           ╚══════════════════════════════════════════════════════════╝
         */}
         <div className="animation-block relative h-screen w-full overflow-hidden">
-          <LandingHero onMenuClick={() => setMenuOpen(true)} />
+          <LandingHero onMenuClick={() => setMenuOpen(true)} onBookDemo={() => setDemoModalOpen(true)} />
           <FeaturesSection />
           <CubeGrid />
         </div>
