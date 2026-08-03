@@ -1,0 +1,3 @@
+## 2025-03-05 - Managing Modal Component Form and Success States Cleanly
+**Learning:** For modals that handle asynchronous state changes or contain complex forms, resetting state upon close/reopen using synchronous state setters inside `useEffect` can trigger React warnings or ESLint rule violations. Passing a dynamic React `key` prop based on the modal's open/closed state directly from the parent cleanly unmounts and remounts the modal, resetting its internal states perfectly and transparently.
+**Action:** Always leverage the dynamic `key` pattern (e.g., `key={isOpen ? 'open' : 'closed'}`) to manage state resets for transient overlay dialogs rather than complex imperative cleanups.

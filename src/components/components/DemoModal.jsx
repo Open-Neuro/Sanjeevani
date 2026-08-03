@@ -71,6 +71,9 @@ export default function DemoModal({ isOpen, onClose }) {
     return (
         <div
             ref={modalRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="demo-modal-title"
             className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto p-2 md:p-4"
             onClick={handleClose}
             style={{
@@ -130,6 +133,7 @@ export default function DemoModal({ isOpen, onClose }) {
 
                 <button
                     onClick={handleClose}
+                    aria-label="Close modal"
                     style={{
                         position: "absolute",
                         top: "18px",
@@ -194,15 +198,18 @@ export default function DemoModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="demo-form-field">
-                        <h2 style={{
-                            fontFamily: "'Outfit', sans-serif",
-                            fontWeight: 900,
-                            fontSize: "clamp(1.2rem, 3vw, 1.65rem)",
-                            color: "#f4ede6",
-                            marginBottom: "4px",
-                            letterSpacing: "-0.02em",
-                            lineHeight: 1.2
-                        }}>
+                        <h2
+                            id="demo-modal-title"
+                            style={{
+                                fontFamily: "'Outfit', sans-serif",
+                                fontWeight: 900,
+                                fontSize: "clamp(1.2rem, 3vw, 1.65rem)",
+                                color: "#f4ede6",
+                                marginBottom: "4px",
+                                letterSpacing: "-0.02em",
+                                lineHeight: 1.2
+                            }}
+                        >
                             Book Your Free Demo
                         </h2>
                     </div>
@@ -222,39 +229,49 @@ export default function DemoModal({ isOpen, onClose }) {
                     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                         <div className="demo-form-field demo-input-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
                             <div>
-                                <label style={{
-                                    display: "block",
-                                    color: "rgba(244, 237, 230, 0.7)",
-                                    fontSize: "0.68rem",
-                                    fontWeight: 600,
-                                    letterSpacing: "0.08em",
-                                    textTransform: "uppercase",
-                                    marginBottom: "6px",
-                                    fontFamily: "'Outfit', sans-serif"
-                                }}>Name</label>
+                                <label
+                                    htmlFor="demo-name"
+                                    style={{
+                                        display: "block",
+                                        color: "rgba(244, 237, 230, 0.7)",
+                                        fontSize: "0.68rem",
+                                        fontWeight: 600,
+                                        letterSpacing: "0.08em",
+                                        textTransform: "uppercase",
+                                        marginBottom: "6px",
+                                        fontFamily: "'Outfit', sans-serif"
+                                    }}
+                                >Name <span style={{ color: "#b7c25e" }}>*</span></label>
                                 <input
+                                    id="demo-name"
                                     type="text"
                                     className="demo-input"
                                     required
+                                    aria-required="true"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 />
                             </div>
                             <div>
-                                <label style={{
-                                    display: "block",
-                                    color: "rgba(244, 237, 230, 0.7)",
-                                    fontSize: "0.68rem",
-                                    fontWeight: 600,
-                                    letterSpacing: "0.08em",
-                                    textTransform: "uppercase",
-                                    marginBottom: "6px",
-                                    fontFamily: "'Outfit', sans-serif"
-                                }}>Pharmacy Name</label>
+                                <label
+                                    htmlFor="demo-pharmacy"
+                                    style={{
+                                        display: "block",
+                                        color: "rgba(244, 237, 230, 0.7)",
+                                        fontSize: "0.68rem",
+                                        fontWeight: 600,
+                                        letterSpacing: "0.08em",
+                                        textTransform: "uppercase",
+                                        marginBottom: "6px",
+                                        fontFamily: "'Outfit', sans-serif"
+                                    }}
+                                >Pharmacy Name <span style={{ color: "#b7c25e" }}>*</span></label>
                                 <input
+                                    id="demo-pharmacy"
                                     type="text"
                                     className="demo-input"
                                     required
+                                    aria-required="true"
                                     value={formData.pharmacyName}
                                     onChange={(e) => setFormData({ ...formData, pharmacyName: e.target.value })}
                                 />
@@ -262,57 +279,71 @@ export default function DemoModal({ isOpen, onClose }) {
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
-                                display: "block",
-                                color: "rgba(244, 237, 230, 0.7)",
-                                fontSize: "0.68rem",
-                                fontWeight: 600,
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                marginBottom: "6px",
-                                fontFamily: "'Outfit', sans-serif"
-                            }}>Phone Number</label>
+                            <label
+                                htmlFor="demo-phone"
+                                style={{
+                                    display: "block",
+                                    color: "rgba(244, 237, 230, 0.7)",
+                                    fontSize: "0.68rem",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    marginBottom: "6px",
+                                    fontFamily: "'Outfit', sans-serif"
+                                }}
+                            >Phone Number <span style={{ color: "#b7c25e" }}>*</span></label>
                             <input
+                                id="demo-phone"
                                 type="tel"
                                 className="demo-input"
                                 required
+                                aria-required="true"
                                 value={formData.phone}
                                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             />
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
-                                display: "block",
-                                color: "rgba(244, 237, 230, 0.7)",
-                                fontSize: "0.68rem",
-                                fontWeight: 600,
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                marginBottom: "6px",
-                                fontFamily: "'Outfit', sans-serif"
-                            }}>Email</label>
+                            <label
+                                htmlFor="demo-email"
+                                style={{
+                                    display: "block",
+                                    color: "rgba(244, 237, 230, 0.7)",
+                                    fontSize: "0.68rem",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    marginBottom: "6px",
+                                    fontFamily: "'Outfit', sans-serif"
+                                }}
+                            >Email <span style={{ color: "#b7c25e" }}>*</span></label>
                             <input
+                                id="demo-email"
                                 type="email"
                                 className="demo-input"
                                 required
+                                aria-required="true"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             />
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
-                                display: "block",
-                                color: "rgba(244, 237, 230, 0.7)",
-                                fontSize: "0.68rem",
-                                fontWeight: 600,
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                marginBottom: "6px",
-                                fontFamily: "'Outfit', sans-serif"
-                            }}>Message (Optional)</label>
+                            <label
+                                htmlFor="demo-message"
+                                style={{
+                                    display: "block",
+                                    color: "rgba(244, 237, 230, 0.7)",
+                                    fontSize: "0.68rem",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    marginBottom: "6px",
+                                    fontFamily: "'Outfit', sans-serif"
+                                }}
+                            >Message (Optional)</label>
                             <textarea
+                                id="demo-message"
                                 className="demo-input"
                                 rows="2"
                                 style={{ resize: "vertical", minHeight: "68px" }}

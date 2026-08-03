@@ -6,11 +6,8 @@ import Logo3D from "../effects/Logo3D";
  * LandingHero — LAYER 1 (z-10)
  * The initial hero screen with the dark-green gradient, brand title,
  * divider row, and scroll hint. Always sits behind the cube curtain.
- *
- * Props:
- *  onMenuClick — passed down to Navbar to open the Sidebar
  */
-export default function LandingHero({ onMenuClick }) {
+export default function LandingHero() {
     return (
         <div
             className="landing-content absolute inset-0 z-10 overflow-hidden"
@@ -47,8 +44,6 @@ export default function LandingHero({ onMenuClick }) {
                         opacity: 0.18, mixBlendMode: 'luminosity',
                     }} />
 
-                    {/* Navbar will now be rendered at the App level to stay sticky */}
-
                     {/* Giant brand title */}
                     <div className="hero-text" style={{
                         position: 'absolute', top: '5%', left: '5%',
@@ -66,8 +61,6 @@ export default function LandingHero({ onMenuClick }) {
                             <sup style={{ fontSize: '0.2em', color: '#f4ede6', marginLeft: '4px', fontWeight: 400, opacity: 0.7, verticalAlign: 'super' }}>™</sup>
                         </h1>
                     </div>
-
-
 
                     {/* Scroll hint */}
                     <div className="absolute bottom-[2%] md:bottom-[5%] left-[5%] z-10 flex items-center gap-[8px]">
