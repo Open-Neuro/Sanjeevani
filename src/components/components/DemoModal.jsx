@@ -3,20 +3,18 @@ import gsap from "gsap";
 
 export default function DemoModal({ isOpen, onClose }) {
     const [formData, setFormData] = useState({
-        name: "",
-        pharmacyName: "",
-        phone: "",
-        email: "",
-        message: ""
+        name: "", pharmacyName: "", phone: "", email: "", message: ""
     });
     const [submitted, setSubmitted] = useState(false);
     const modalRef = useRef(null);
     const contentRef = useRef(null);
     const formRef = useRef(null);
+    const firstInputRef = useRef(null);
 
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
+            setTimeout(() => firstInputRef.current?.focus(), 500);
             gsap.fromTo(modalRef.current,
                 { opacity: 0 },
                 { opacity: 1, duration: 0.5, ease: "power2.out" }
@@ -107,6 +105,9 @@ export default function DemoModal({ isOpen, onClose }) {
                 ref={contentRef}
                 className="relative w-full"
                 onClick={(e) => e.stopPropagation()}
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="modal-title"
                 style={{
                     maxWidth: "700px",
                     maxHeight: "calc(100vh - 20px)",
@@ -130,6 +131,7 @@ export default function DemoModal({ isOpen, onClose }) {
 
                 <button
                     onClick={handleClose}
+                    aria-label="Close modal"
                     style={{
                         position: "absolute",
                         top: "18px",
@@ -194,7 +196,7 @@ export default function DemoModal({ isOpen, onClose }) {
                     </div>
 
                     <div className="demo-form-field">
-                        <h2 style={{
+                        <h2 id="modal-title" style={{
                             fontFamily: "'Outfit', sans-serif",
                             fontWeight: 900,
                             fontSize: "clamp(1.2rem, 3vw, 1.65rem)",
@@ -233,9 +235,11 @@ export default function DemoModal({ isOpen, onClose }) {
                                     fontFamily: "'Outfit', sans-serif"
                                 }}>Name</label>
                                 <input
+                                    ref={firstInputRef}
                                     type="text"
                                     className="demo-input"
                                     required
+                                    aria-required="true"
                                     value={formData.name}
                                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                                 />
@@ -255,6 +259,7 @@ export default function DemoModal({ isOpen, onClose }) {
                                     type="text"
                                     className="demo-input"
                                     required
+                                    aria-required="true"
                                     value={formData.pharmacyName}
                                     onChange={(e) => setFormData({ ...formData, pharmacyName: e.target.value })}
                                 />
@@ -276,6 +281,7 @@ export default function DemoModal({ isOpen, onClose }) {
                                 type="tel"
                                 className="demo-input"
                                 required
+                                aria-required="true"
                                 value={formData.phone}
                                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                             />
@@ -296,6 +302,7 @@ export default function DemoModal({ isOpen, onClose }) {
                                 type="email"
                                 className="demo-input"
                                 required
+                                aria-required="true"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             />
