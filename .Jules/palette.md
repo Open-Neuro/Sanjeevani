@@ -1,0 +1,3 @@
+## 2025-06-12 - [Modal Accessibility & GSAP Focus Management]
+**Learning:** For modals using GSAP entrance animations, triggering auto-focus on the first input via the `onComplete` callback is more reliable than using a `useEffect` with a timeout, as it ensures the element is visible and the animation has finished before focus is applied. Additionally, always ensure `role="dialog"`, `aria-modal="true"`, and proper label-input associations are present for full accessibility.
+**Action:** Use GSAP `onComplete` for focus management in animated components. Ensure all form fields have unique IDs and matching `htmlFor` attributes on labels.
