@@ -1,0 +1,3 @@
+## 2026-06-14 - [Auto-focus and Modal Accessibility]
+**Learning:** For modals with entrance animations (like those using GSAP), triggering auto-focus immediately on mount can sometimes fail or be overridden by the animation's initial state. Using the animation's `onComplete` callback ensures the focus is set when the element is fully interactive and visible. Additionally, ensuring all required fields have `aria-required="true"` improves screen reader clarity even when the HTML `required` attribute is present.
+**Action:** Always synchronize focus management with entrance animations and explicitly add ARIA attributes to mandatory form fields.
