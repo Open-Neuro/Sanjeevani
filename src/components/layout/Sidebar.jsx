@@ -65,9 +65,11 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Panel */}
             <div
                 ref={panelRef}
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
+                    visibility: isOpen ? "visible" : "hidden",
                     background: "linear-gradient(170deg, #1c2b0d 0%, #2d3d1a 45%, #374c1e 100%)",
                     zIndex: 199,
                     display: "flex", flexDirection: "column", justifyContent: "space-between",
@@ -81,6 +83,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     {/* CLOSE */}
                     <button
                         onClick={onClose}
+                        aria-label="Close sidebar"
                         style={{ ...linkBase, marginBottom: "60px", display: "block" }}
                         onMouseEnter={e => e.currentTarget.style.opacity = 1}
                         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
