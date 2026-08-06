@@ -65,6 +65,7 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Panel */}
             <div
                 ref={panelRef}
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
@@ -73,6 +74,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     display: "flex", flexDirection: "column", justifyContent: "space-between",
                     padding: "28px 52px 38px",
                     transform: "translateX(-100%)",
+                    visibility: isOpen ? "visible" : "hidden",
                     boxShadow: "10px 0 50px rgba(0,0,0,0.55)",
                     overflowY: "auto",
                 }}
