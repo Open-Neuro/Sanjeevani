@@ -130,6 +130,7 @@ export default function DemoModal({ isOpen, onClose }) {
 
                 <button
                     onClick={handleClose}
+                    aria-label="Close modal"
                     style={{
                         position: "absolute",
                         top: "18px",
@@ -222,17 +223,20 @@ export default function DemoModal({ isOpen, onClose }) {
                     <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                         <div className="demo-form-field demo-input-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
                             <div>
-                                <label style={{
-                                    display: "block",
-                                    color: "rgba(244, 237, 230, 0.7)",
-                                    fontSize: "0.68rem",
-                                    fontWeight: 600,
-                                    letterSpacing: "0.08em",
-                                    textTransform: "uppercase",
-                                    marginBottom: "6px",
-                                    fontFamily: "'Outfit', sans-serif"
-                                }}>Name</label>
+                                <label
+                                    htmlFor="demo-name"
+                                    style={{
+                                        display: "block",
+                                        color: "rgba(244, 237, 230, 0.7)",
+                                        fontSize: "0.68rem",
+                                        fontWeight: 600,
+                                        letterSpacing: "0.08em",
+                                        textTransform: "uppercase",
+                                        marginBottom: "6px",
+                                        fontFamily: "'Outfit', sans-serif"
+                                    }}>Name</label>
                                 <input
+                                    id="demo-name"
                                     type="text"
                                     className="demo-input"
                                     required
@@ -241,17 +245,20 @@ export default function DemoModal({ isOpen, onClose }) {
                                 />
                             </div>
                             <div>
-                                <label style={{
-                                    display: "block",
-                                    color: "rgba(244, 237, 230, 0.7)",
-                                    fontSize: "0.68rem",
-                                    fontWeight: 600,
-                                    letterSpacing: "0.08em",
-                                    textTransform: "uppercase",
-                                    marginBottom: "6px",
-                                    fontFamily: "'Outfit', sans-serif"
-                                }}>Pharmacy Name</label>
+                                <label
+                                    htmlFor="demo-pharmacy"
+                                    style={{
+                                        display: "block",
+                                        color: "rgba(244, 237, 230, 0.7)",
+                                        fontSize: "0.68rem",
+                                        fontWeight: 600,
+                                        letterSpacing: "0.08em",
+                                        textTransform: "uppercase",
+                                        marginBottom: "6px",
+                                        fontFamily: "'Outfit', sans-serif"
+                                    }}>Pharmacy Name</label>
                                 <input
+                                    id="demo-pharmacy"
                                     type="text"
                                     className="demo-input"
                                     required
@@ -262,17 +269,20 @@ export default function DemoModal({ isOpen, onClose }) {
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
-                                display: "block",
-                                color: "rgba(244, 237, 230, 0.7)",
-                                fontSize: "0.68rem",
-                                fontWeight: 600,
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                marginBottom: "6px",
-                                fontFamily: "'Outfit', sans-serif"
-                            }}>Phone Number</label>
+                            <label
+                                htmlFor="demo-phone"
+                                style={{
+                                    display: "block",
+                                    color: "rgba(244, 237, 230, 0.7)",
+                                    fontSize: "0.68rem",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    marginBottom: "6px",
+                                    fontFamily: "'Outfit', sans-serif"
+                                }}>Phone Number</label>
                             <input
+                                id="demo-phone"
                                 type="tel"
                                 className="demo-input"
                                 required
@@ -282,17 +292,20 @@ export default function DemoModal({ isOpen, onClose }) {
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
-                                display: "block",
-                                color: "rgba(244, 237, 230, 0.7)",
-                                fontSize: "0.68rem",
-                                fontWeight: 600,
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                marginBottom: "6px",
-                                fontFamily: "'Outfit', sans-serif"
-                            }}>Email</label>
+                            <label
+                                htmlFor="demo-email"
+                                style={{
+                                    display: "block",
+                                    color: "rgba(244, 237, 230, 0.7)",
+                                    fontSize: "0.68rem",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    marginBottom: "6px",
+                                    fontFamily: "'Outfit', sans-serif"
+                                }}>Email</label>
                             <input
+                                id="demo-email"
                                 type="email"
                                 className="demo-input"
                                 required
@@ -302,17 +315,20 @@ export default function DemoModal({ isOpen, onClose }) {
                         </div>
 
                         <div className="demo-form-field">
-                            <label style={{
-                                display: "block",
-                                color: "rgba(244, 237, 230, 0.7)",
-                                fontSize: "0.68rem",
-                                fontWeight: 600,
-                                letterSpacing: "0.08em",
-                                textTransform: "uppercase",
-                                marginBottom: "6px",
-                                fontFamily: "'Outfit', sans-serif"
-                            }}>Message (Optional)</label>
+                            <label
+                                htmlFor="demo-message"
+                                style={{
+                                    display: "block",
+                                    color: "rgba(244, 237, 230, 0.7)",
+                                    fontSize: "0.68rem",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    marginBottom: "6px",
+                                    fontFamily: "'Outfit', sans-serif"
+                                }}>Message (Optional)</label>
                             <textarea
+                                id="demo-message"
                                 className="demo-input"
                                 rows="2"
                                 style={{ resize: "vertical", minHeight: "68px" }}
