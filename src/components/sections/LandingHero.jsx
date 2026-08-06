@@ -10,13 +10,26 @@ import Logo3D from "../effects/Logo3D";
  * Props:
  *  onMenuClick — passed down to Navbar to open the Sidebar
  */
-export default function LandingHero({ onMenuClick }) {
+export default function LandingHero() {
     return (
         <div
             className="landing-content absolute inset-0 z-10 overflow-hidden"
             style={{ background: 'linear-gradient(to bottom, #2b3618 0%, #667440 40%, #707F48 75%, #8E956C 100%)' }}
         >
-            <div className="main w-full h-full rotate-[-10deg] scale-[1.7] origin-center">
+            <style>{`
+                .main-hero {
+                    width: 100%;
+                    height: 100%;
+                    transform: rotate(-10deg) scale(1.7);
+                    transform-origin: center;
+                }
+                @media (max-width: 768px) {
+                    .main-hero {
+                        transform: rotate(-5deg) scale(1.3);
+                    }
+                }
+            `}</style>
+            <div className="main-hero">
                 <div
                     className="landing w-full h-full relative"
                     style={{ background: 'linear-gradient(to bottom, #2b3618 0%, #667440 40%, #707F48 75%, #8E956C 100%)' }}
