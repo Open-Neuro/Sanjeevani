@@ -79,7 +79,7 @@ export default function App() {
           ╚══════════════════════════════════════════════════════════╝
         */}
         <div className="animation-block relative h-screen w-full overflow-hidden">
-          <LandingHero onMenuClick={() => setMenuOpen(true)} />
+          <LandingHero onMenuClick={() => setMenuOpen(true)} onBookDemo={() => setDemoModalOpen(true)} />
           <FeaturesSection />
           <CubeGrid />
         </div>
@@ -114,7 +114,7 @@ export default function App() {
       <Sidebar isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
 
       {/* Book a Demo Modal */}
-      <DemoModal isOpen={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
+      <DemoModal key={demoModalOpen ? "open" : "closed"} isOpen={demoModalOpen} onClose={() => setDemoModalOpen(false)} />
     </>
   );
 }
