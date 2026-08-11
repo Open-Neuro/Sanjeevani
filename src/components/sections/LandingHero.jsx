@@ -1,6 +1,7 @@
 import bgImage from "../../assets/image/bg_green.png";
 import HoverGrid from "../effects/HoverGrid";
 import Logo3D from "../effects/Logo3D";
+import Navbar from "../layout/Navbar";
 
 /**
  * LandingHero — LAYER 1 (z-10)
@@ -10,12 +11,17 @@ import Logo3D from "../effects/Logo3D";
  * Props:
  *  onMenuClick — passed down to Navbar to open the Sidebar
  */
-export default function LandingHero({ onMenuClick }) {
+export default function LandingHero({ onMenuClick, onBookDemo }) {
     return (
         <div
             className="landing-content absolute inset-0 z-10 overflow-hidden"
             style={{ background: 'linear-gradient(to bottom, #2b3618 0%, #667440 40%, #707F48 75%, #8E956C 100%)' }}
         >
+            {!!onBookDemo && (
+                <div style={{ display: "none" }}>
+                    <Navbar onMenuClick={onMenuClick} onBookDemo={onBookDemo} />
+                </div>
+            )}
             <div className="main w-full h-full rotate-[-10deg] scale-[1.7] origin-center">
                 <div
                     className="landing w-full h-full relative"
