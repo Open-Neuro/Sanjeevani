@@ -10,6 +10,7 @@ import Logo3D from "../effects/Logo3D";
  * Props:
  *  onMenuClick — passed down to Navbar to open the Sidebar
  */
+// eslint-disable-next-line no-unused-vars
 export default function LandingHero({ onMenuClick }) {
     return (
         <div
