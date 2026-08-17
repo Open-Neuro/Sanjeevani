@@ -65,6 +65,10 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Panel */}
             <div
                 ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Navigation Menu"
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
@@ -75,12 +79,15 @@ export default function Sidebar({ isOpen, onClose }) {
                     transform: "translateX(-100%)",
                     boxShadow: "10px 0 50px rgba(0,0,0,0.55)",
                     overflowY: "auto",
+                    visibility: isOpen ? "visible" : "hidden",
                 }}
             >
                 <div>
                     {/* CLOSE */}
                     <button
                         onClick={onClose}
+                        aria-label="Close navigation menu"
+                        className="focus-visible:ring-2 focus-visible:ring-[#b7c25e] focus-visible:outline-none rounded-sm"
                         style={{ ...linkBase, marginBottom: "60px", display: "block" }}
                         onMouseEnter={e => e.currentTarget.style.opacity = 1}
                         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
@@ -96,6 +103,7 @@ export default function Sidebar({ isOpen, onClose }) {
                                 href={link.href}
                                 ref={el => (itemsRef.current[i] = el)}
                                 onClick={onClose}
+                                className="focus-visible:ring-2 focus-visible:ring-[#b7c25e] focus-visible:outline-none rounded-sm"
                                 style={{
                                     display: "block",
                                     color: "#f4ede6",
