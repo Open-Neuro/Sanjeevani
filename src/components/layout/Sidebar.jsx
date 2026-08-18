@@ -22,6 +22,17 @@ export default function Sidebar({ isOpen, onClose }) {
         { label: "Contact", href: "#footer-section" },
     ];
 
+    /* ── Escape Key Handler ── */
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape" && isOpen) {
+                onClose();
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, onClose]);
+
     /* ── GSAP open / close ── */
     useEffect(() => {
         const panel = panelRef.current;
@@ -52,6 +63,7 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Backdrop */}
             <div
                 onClick={onClose}
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", inset: 0,
                     background: "rgba(0,0,0,0.40)",
@@ -65,6 +77,10 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Panel */}
             <div
                 ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Navigation Menu"
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
@@ -75,12 +91,14 @@ export default function Sidebar({ isOpen, onClose }) {
                     transform: "translateX(-100%)",
                     boxShadow: "10px 0 50px rgba(0,0,0,0.55)",
                     overflowY: "auto",
+                    visibility: isOpen ? "visible" : "hidden",
                 }}
             >
                 <div>
                     {/* CLOSE */}
                     <button
                         onClick={onClose}
+                        aria-label="Close navigation menu"
                         style={{ ...linkBase, marginBottom: "60px", display: "block" }}
                         onMouseEnter={e => e.currentTarget.style.opacity = 1}
                         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}

@@ -56,6 +56,7 @@ export default function Navbar({ onMenuClick }) {
             <button
                 className="nav-link"
                 onClick={onMenuClick}
+                aria-label="Open navigation menu"
                 style={{
                     background: 'none', border: 'none', cursor: 'pointer',
                     display: 'flex', alignItems: 'center', gap: '6px', padding: 0,
