@@ -3,7 +3,7 @@
  * Props:
  *  onMenuClick — opens the Sidebar
  */
-export default function Navbar({ onMenuClick }) {
+export default function Navbar({ onMenuClick, onBookDemo }) {
     return (
         <div
             className="navbar fixed top-0 left-0 w-full py-4 px-6 md:py-7 md:px-10 flex justify-between items-center"
@@ -36,26 +36,34 @@ export default function Navbar({ onMenuClick }) {
                 .nav-link:hover::after {
                     width: 100%;
                 }
+                .nav-link:focus-visible, .nav-cta:focus-visible {
+                    outline: 2px solid var(--nav-color);
+                    outline-offset: 4px;
+                    border-radius: 4px;
+                }
                 .nav-cta {
                     border: 1px solid rgba(234, 229, 217, 0.35);
                     border-radius: 999px;
-                    padding: 0.8rem 1.15rem;
+                    padding: 0.5rem 1.15rem;
                     color: var(--nav-color);
                     font-size: 0.72rem;
                     font-weight: 700;
                     letter-spacing: 0.15em;
                     text-transform: uppercase;
+                    background: transparent;
+                    cursor: pointer;
                     transition: transform 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
                 }
                 .nav-cta:hover {
                     transform: translateY(-1px);
-                    background: rgba(234, 229, 217, 0.08);
-                    border-color: rgba(234, 229, 217, 0.55);
+                    background: rgba(234, 229, 217, 0.12);
+                    border-color: rgba(234, 229, 217, 0.75);
                 }
             `}</style>
             <button
                 className="nav-link"
                 onClick={onMenuClick}
+                aria-label="Open Navigation Menu"
                 style={{
                     background: 'none', border: 'none', cursor: 'pointer',
                     display: 'flex', alignItems: 'center', gap: '6px', padding: 0,
@@ -66,6 +74,14 @@ export default function Navbar({ onMenuClick }) {
 
             <div className="hidden md:flex items-center gap-[22px]">
                 <a href="#footer-section" className="nav-link">CONTACT US</a>
+                <button
+                    type="button"
+                    onClick={onBookDemo}
+                    className="nav-cta"
+                    aria-label="Book a Demo"
+                >
+                    BOOK A DEMO
+                </button>
                 <a
                     href="https://sanjeevani-console.vercel.app/"
                     target="_blank"
