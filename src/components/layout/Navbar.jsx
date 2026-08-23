@@ -2,8 +2,9 @@
  * Navbar — top bar on the landing hero
  * Props:
  *  onMenuClick — opens the Sidebar
+ *  onBookDemo — opens the Demo Modal
  */
-export default function Navbar({ onMenuClick }) {
+export default function Navbar({ onMenuClick, onBookDemo }) {
     return (
         <div
             className="navbar fixed top-0 left-0 w-full py-4 px-6 md:py-7 md:px-10 flex justify-between items-center"
@@ -56,12 +57,13 @@ export default function Navbar({ onMenuClick }) {
             <button
                 className="nav-link"
                 onClick={onMenuClick}
+                aria-label="Open navigation menu"
                 style={{
                     background: 'none', border: 'none', cursor: 'pointer',
                     display: 'flex', alignItems: 'center', gap: '6px', padding: 0,
                 }}
             >
-                <span style={{ fontSize: '0.85rem' }}></span> MENU
+                <i className="ri-menu-line" aria-hidden="true" style={{ fontSize: '0.9rem' }} /> MENU
             </button>
 
             <div className="hidden md:flex items-center gap-[22px]">
@@ -75,6 +77,15 @@ export default function Navbar({ onMenuClick }) {
                 >
                     GET STARTED
                 </a>
+                {onBookDemo && (
+                    <button
+                        onClick={onBookDemo}
+                        className="nav-cta"
+                        style={{ background: 'none', cursor: 'pointer' }}
+                    >
+                        BOOK A DEMO
+                    </button>
+                )}
             </div>
         </div>
     );
