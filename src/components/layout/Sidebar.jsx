@@ -22,6 +22,17 @@ export default function Sidebar({ isOpen, onClose }) {
         { label: "Contact", href: "#footer-section" },
     ];
 
+    /* ── Escape key listener ── */
+    useEffect(() => {
+        const handleKeyDown = (e) => {
+            if (isOpen && e.key === "Escape") {
+                onClose();
+            }
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, onClose]);
+
     /* ── GSAP open / close ── */
     useEffect(() => {
         const panel = panelRef.current;
@@ -65,6 +76,10 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Panel */}
             <div
                 ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Navigation Menu"
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
@@ -73,6 +88,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     display: "flex", flexDirection: "column", justifyContent: "space-between",
                     padding: "28px 52px 38px",
                     transform: "translateX(-100%)",
+                    visibility: isOpen ? "visible" : "hidden",
                     boxShadow: "10px 0 50px rgba(0,0,0,0.55)",
                     overflowY: "auto",
                 }}
@@ -81,6 +97,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     {/* CLOSE */}
                     <button
                         onClick={onClose}
+                        aria-label="Close menu"
                         style={{ ...linkBase, marginBottom: "60px", display: "block" }}
                         onMouseEnter={e => e.currentTarget.style.opacity = 1}
                         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
