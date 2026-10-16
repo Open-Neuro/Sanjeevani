@@ -22,13 +22,20 @@ export default function Sidebar({ isOpen, onClose }) {
         { label: "Contact", href: "#footer-section" },
     ];
 
-    /* ── GSAP open / close ── */
+    /* ── GSAP open / close & Escape key handler ── */
     useEffect(() => {
         const panel = panelRef.current;
         const items = itemsRef.current.filter(Boolean);
         const footer = footerRef.current;
 
+        const handleKeyDown = (e) => {
+            if (e.key === "Escape" && isOpen) {
+                onClose();
+            }
+        };
+
         if (isOpen) {
+            window.addEventListener("keydown", handleKeyDown);
             gsap.fromTo(panel, { x: "-100%" }, { x: "0%", duration: 0.65, ease: "expo.out" });
             gsap.fromTo(items, { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.07, duration: 0.5, delay: 0.22, ease: "power3.out" });
             gsap.fromTo(footer, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, delay: 0.52, ease: "power2.out" });
@@ -36,7 +43,9 @@ export default function Sidebar({ isOpen, onClose }) {
             gsap.to(items, { y: 24, opacity: 0, stagger: 0.04, duration: 0.28, ease: "power2.in" });
             gsap.to(panel, { x: "-100%", duration: 0.5, delay: 0.12, ease: "expo.in" });
         }
-    }, [isOpen]);
+
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, onClose]);
 
     const linkBase = {
         color: "#f4ede6", opacity: 0.7,
@@ -65,6 +74,10 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Panel */}
             <div
                 ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Navigation menu"
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
@@ -75,12 +88,14 @@ export default function Sidebar({ isOpen, onClose }) {
                     transform: "translateX(-100%)",
                     boxShadow: "10px 0 50px rgba(0,0,0,0.55)",
                     overflowY: "auto",
+                    visibility: isOpen ? "visible" : "hidden",
                 }}
             >
                 <div>
                     {/* CLOSE */}
                     <button
                         onClick={onClose}
+                        aria-label="Close navigation menu"
                         style={{ ...linkBase, marginBottom: "60px", display: "block" }}
                         onMouseEnter={e => e.currentTarget.style.opacity = 1}
                         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
