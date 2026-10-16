@@ -10,6 +10,7 @@ import gsap from "gsap";
  */
 export default function Sidebar({ isOpen, onClose }) {
     const panelRef = useRef(null);
+    const closeBtnRef = useRef(null);
     const itemsRef = useRef([]);
     const footerRef = useRef(null);
     const navLinks = [
@@ -29,7 +30,18 @@ export default function Sidebar({ isOpen, onClose }) {
         const footer = footerRef.current;
 
         if (isOpen) {
-            gsap.fromTo(panel, { x: "-100%" }, { x: "0%", duration: 0.65, ease: "expo.out" });
+            gsap.fromTo(
+                panel,
+                { x: "-100%" },
+                {
+                    x: "0%",
+                    duration: 0.65,
+                    ease: "expo.out",
+                    onComplete: () => {
+                        closeBtnRef.current?.focus();
+                    },
+                }
+            );
             gsap.fromTo(items, { y: 40, opacity: 0 }, { y: 0, opacity: 1, stagger: 0.07, duration: 0.5, delay: 0.22, ease: "power3.out" });
             gsap.fromTo(footer, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.45, delay: 0.52, ease: "power2.out" });
         } else {
@@ -65,6 +77,10 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Panel */}
             <div
                 ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Navigation Menu"
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
@@ -75,12 +91,15 @@ export default function Sidebar({ isOpen, onClose }) {
                     transform: "translateX(-100%)",
                     boxShadow: "10px 0 50px rgba(0,0,0,0.55)",
                     overflowY: "auto",
+                    visibility: isOpen ? "visible" : "hidden",
                 }}
             >
                 <div>
                     {/* CLOSE */}
                     <button
+                        ref={closeBtnRef}
                         onClick={onClose}
+                        aria-label="Close navigation menu"
                         style={{ ...linkBase, marginBottom: "60px", display: "block" }}
                         onMouseEnter={e => e.currentTarget.style.opacity = 1}
                         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
