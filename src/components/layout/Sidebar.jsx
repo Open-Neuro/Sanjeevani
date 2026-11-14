@@ -22,7 +22,7 @@ export default function Sidebar({ isOpen, onClose }) {
         { label: "Contact", href: "#footer-section" },
     ];
 
-    /* ── GSAP open / close ── */
+    /* ── GSAP open / close & Escape key ── */
     useEffect(() => {
         const panel = panelRef.current;
         const items = itemsRef.current.filter(Boolean);
@@ -36,7 +36,13 @@ export default function Sidebar({ isOpen, onClose }) {
             gsap.to(items, { y: 24, opacity: 0, stagger: 0.04, duration: 0.28, ease: "power2.in" });
             gsap.to(panel, { x: "-100%", duration: 0.5, delay: 0.12, ease: "expo.in" });
         }
-    }, [isOpen]);
+
+        const handleKeyDown = (e) => {
+            if (isOpen && e.key === "Escape") onClose();
+        };
+        window.addEventListener("keydown", handleKeyDown);
+        return () => window.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen, onClose]);
 
     const linkBase = {
         color: "#f4ede6", opacity: 0.7,
@@ -52,6 +58,7 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Backdrop */}
             <div
                 onClick={onClose}
+                aria-hidden="true"
                 style={{
                     position: "fixed", inset: 0,
                     background: "rgba(0,0,0,0.40)",
@@ -65,6 +72,10 @@ export default function Sidebar({ isOpen, onClose }) {
             {/* Panel */}
             <div
                 ref={panelRef}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Navigation menu"
+                aria-hidden={!isOpen}
                 style={{
                     position: "fixed", top: 0, left: 0,
                     width: "min(480px, 48vw)", height: "100vh",
@@ -73,6 +84,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     display: "flex", flexDirection: "column", justifyContent: "space-between",
                     padding: "28px 52px 38px",
                     transform: "translateX(-100%)",
+                    visibility: isOpen ? "visible" : "hidden",
                     boxShadow: "10px 0 50px rgba(0,0,0,0.55)",
                     overflowY: "auto",
                 }}
@@ -81,6 +93,8 @@ export default function Sidebar({ isOpen, onClose }) {
                     {/* CLOSE */}
                     <button
                         onClick={onClose}
+                        aria-label="Close navigation menu"
+                        className="focus-visible:outline-2 focus-visible:outline-[#b7c25e] focus-visible:outline-offset-4"
                         style={{ ...linkBase, marginBottom: "60px", display: "block" }}
                         onMouseEnter={e => e.currentTarget.style.opacity = 1}
                         onMouseLeave={e => e.currentTarget.style.opacity = 0.7}
@@ -96,6 +110,7 @@ export default function Sidebar({ isOpen, onClose }) {
                                 href={link.href}
                                 ref={el => (itemsRef.current[i] = el)}
                                 onClick={onClose}
+                                className="focus-visible:outline-2 focus-visible:outline-[#b7c25e] focus-visible:outline-offset-2"
                                 style={{
                                     display: "block",
                                     color: "#f4ede6",
