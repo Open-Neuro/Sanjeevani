@@ -361,7 +361,176 @@ export default function DemoModal({ isOpen, onClose }) {
                                 style={{
                                     display: "block",
                                     color: "rgba(244, 237, 230, 0.7)",
-      
+                                    fontSize: "0.68rem",
+                                    fontWeight: 600,
+                                    letterSpacing: "0.08em",
+                                    textTransform: "uppercase",
+                                    marginBottom: "6px",
+                                    fontFamily: "'Outfit', sans-serif"
+                                }}
+                            >
+                                Message (Optional)
+                            </label>
+                            <textarea
+                                id="demo-message"
+                                className="demo-input"
+                                rows="2"
+                                style={{ resize: "vertical", minHeight: "68px" }}
+                                value={formData.message}
+                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            className="demo-submit-btn demo-btn"
+                            style={{ marginTop: "4px" }}
+                            disabled={isSubmitting}
+                        >
+                            <span>{isSubmitting ? "Scheduling..." : "Schedule Demo"}</span>
+                            {isSubmitting ? (
+                                <i className="ri-loader-4-line animate-spin" style={{ marginLeft: "8px" }} />
+                            ) : (
+                                <i className="ri-arrow-right-line" style={{ marginLeft: "8px" }} />
+                            )}
+                        </button>
+                    </form>
+
+                    <div className="demo-form-field" style={{
+                        marginTop: "20px",
+                        paddingTop: "16px",
+                        borderTop: "1px solid rgba(244, 237, 230, 0.08)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "8px"
+                    }}>
+                        <i className="ri-shield-check-line" style={{ color: "rgba(183, 194, 94, 0.6)", fontSize: "0.9rem" }} />
+                        <span style={{
+                            color: "rgba(244, 237, 230, 0.4)",
+                            fontSize: "0.75rem",
+                            fontFamily: "'Outfit', sans-serif"
+                        }}>
+                            No credit card required • Free consultation
+                        </span>
+                    </div>
+                </div>
+
+                {/* Success State */}
+                {submitted && (
+                    <div style={{
+                        position: "absolute",
+                        inset: 0,
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        padding: "32px",
+                        background: "linear-gradient(160deg, rgba(43, 54, 24, 0.98) 0%, rgba(13, 20, 8, 0.99) 100%)"
+                    }}>
+                        <div style={{
+                            width: "90px",
+                            height: "90px",
+                            borderRadius: "50%",
+                            background: "linear-gradient(135deg, rgba(183, 194, 94, 0.2) 0%, rgba(142, 149, 108, 0.1) 100%)",
+                            border: "2px solid rgba(183, 194, 94, 0.3)",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            marginBottom: "28px",
+                            boxShadow: "0 10px 40px rgba(183, 194, 94, 0.2)"
+                        }}>
+                            <i className="ri-check-line" style={{ fontSize: "2.8rem", color: "#b7c25e" }} />
+                        </div>
+                        <h2 style={{
+                            fontFamily: "'Outfit', sans-serif",
+                            fontWeight: 900,
+                            fontSize: "1.8rem",
+                            color: "#f4ede6",
+                            marginBottom: "12px",
+                            textAlign: "center"
+                        }}>
+                            Request Sent!
+                        </h2>
+                        <p style={{
+                            color: "rgba(244, 237, 230, 0.6)",
+                            fontSize: "1rem",
+                            fontFamily: "'Outfit', sans-serif",
+                            textAlign: "center",
+                            lineHeight: 1.6,
+                            maxWidth: "300px"
+                        }}>
+                            Thank you for your interest. Our team will reach out to you within 24 hours.
+                        </p>
+                        <button
+                            onClick={handleClose}
+                            className="demo-btn"
+                            style={{ marginTop: "32px" }}
+                        >
+                            Done
+                        </button>
+                    </div>
+                )}
+            </div>
+
+            <style>{`
+                @keyframes spin {
+                    from { transform: rotate(0deg); }
+                    to { transform: rotate(360deg); }
+                }
+                .animate-spin {
+                    animation: spin 1s linear infinite;
+                    display: inline-block;
+                }
+                .demo-input {
+                    background: rgba(244, 237, 230, 0.05);
+                    border: 1px solid rgba(244, 237, 230, 0.12);
+                    border-radius: 12px;
+                    padding: 10px 14px;
+                    color: #f4ede6;
+                    font-family: 'Outfit', sans-serif;
+                    font-size: 0.88rem;
+                    width: 100%;
+                    transition: all 0.3s ease;
+                }
+                .demo-input:focus {
+                    outline: none;
+                    border-color: rgba(183, 194, 94, 0.6);
+                    background: rgba(244, 237, 230, 0.08);
+                    box-shadow: 0 0 0 3px rgba(183, 194, 94, 0.1);
+                }
+                .demo-input::placeholder {
+                    color: rgba(244, 237, 230, 0.3);
+                }
+                .demo-btn {
+                    background: linear-gradient(135deg, #b7c25e 0%, #9aaa5a 100%);
+                    border: none;
+                    border-radius: 12px;
+                    padding: 12px 24px;
+                    color: #0a1103;
+                    font-family: 'Outfit', sans-serif;
+                    font-weight: 700;
+                    font-size: 0.84rem;
+                    letter-spacing: 0.05em;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    text-transform: uppercase;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+                @media (max-width: 900px) {
+                    .demo-input {
+                        padding: 9px 12px;
+                    }
+                    .demo-btn {
+                        padding: 11px 20px;
+                    }
+                }
+                .demo-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 12px 35px rgba(183, 194, 94, 0.35);
+                }
                 @media (max-width: 640px) {
                     .demo-input-grid {
                         grid-template-columns: 1fr !important;
